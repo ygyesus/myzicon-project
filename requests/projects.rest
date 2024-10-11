@@ -1,0 +1,28 @@
+GET http://localhost:3000/projects
+
+###
+
+POST http://localhost:3000/projects
+Content-Type: application/json
+
+{
+    "name": "project1"
+}
+
+###
+
+PUT http://localhost:3000/projects/66ef02d7f9022327b9706008
+Content-Type: application/json
+
+{
+    "firstName": "X",
+    "lastName": "X",
+    "role": "Project Manager"
+}
+
+###
+DELETE http://localhost:3000/users/66ef02d7f9022327b9706008
+
+###
+
+
