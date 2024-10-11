@@ -23,3 +23,23 @@ GET /tasks/:id: Get a specific task by ID
 POST /tasks: Create a new task
 PUT /tasks/:id: Update a task by ID
 DELETE /tasks/:id: Delete a task by ID
+
+
+
+
+
+PROJECT
+name    startDate      endDate     incomeSoFar      incomeExpected      expenseSoFar       expenseExpected      taskIDs                 userIDs
+
+TASK
+name    description     userIDs     startDate       endDate             status             incomeExpected       expenseExpected         materialUsageIDs
+
+
+User
+firstName   lastName    role    employmentPeriods[projectID     startDate      endDate  expenseSoFar    expenseExpected     monthlyPayment]
+
+MaterialUsage
+materialID      quantity    cost    projectID       taskID
+
+Material
+name        unit

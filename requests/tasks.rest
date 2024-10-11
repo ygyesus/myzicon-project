@@ -1,0 +1,41 @@
+### Get all tasks
+GET http://localhost:3000/tasks
+Content-Type: application/json
+
+### Get a task by ID
+# GET http://localhost:3000/tasks/{{task_id}}
+# Content-Type: application/json
+
+### Create a new task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "name": "New Task",
+    "description": "This is a new task",
+    "userIDs": ["66ee4528d1381d2673f541e4", "66ee4528d1381d2673f541e4"],
+    "startDate": "2024-10-11",
+    "endDate": "2024-12-11",
+    "status": "Not Started",
+    "incomeExpected": 1000,
+    "expenseExpected": 500
+}
+
+### Update a task by ID
+PUT http://localhost:3000/tasks/67093e11d61a23e72cde3938
+Content-Type: application/json
+
+{
+    "name": "Updated Task",
+    "description": "This task has been updated",
+    "userIDs": ["66ee4528d1381d2673f541e4", "66ee4528d1381d2673f541e4"],
+    "startDate": "2024-10-11",
+    "endDate": "2024-12-11",
+    "status": "In Progress",
+    "incomeExpected": 1200,
+    "expenseExpected": 600
+}
+
+### Delete a task by ID
+DELETE http://localhost:3000/tasks/67093e11d61a23e72cde3938
+Content-Type: application/json

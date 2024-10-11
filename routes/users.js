@@ -43,7 +43,7 @@ router.put('/:id', (req, res) => {
         })
     }
 
-    const user = {firstName, lastName, role, }
+    const user = {firstName, lastName, role, employmentPeriods}
 
     // Takes NORMAL JS Object as argument
     // Returns {new: true} entity, not old version

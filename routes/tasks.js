@@ -1,17 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const Project = require('../models/Project')
+const Task = require('../models/Task')
 router.get('/', (req, res)=>{
-    Project.find({}).then(projects=>{
-        console.log(projects)
-        res.json(projects)
+    Task.find({}).then(tasks=>{
+        console.log(tasks)
+        res.json(tasks)
     })
     .catch(error=>console.log(error))
 })
 
 router.get('/:id', (req, res)=>{
-    Project.findById(req.params.id).then(project=>
-        res.json(project)
+    Task.findById(req.params.id).then(task=>
+        res.json(task)
     )
 })
 
@@ -19,33 +19,32 @@ router.get('/:id', (req, res)=>{
 router.post('/', (req, res) => {
 
     const {
-            name,
-            startDate,
-            endDate,
-            incomeSoFar,
-            incomeExpected,
-            expenseSoFar,
-            expenseExpected,
-            taskIDs,
-            userIDs,
+        name,
+        description,
+        userIDs,
+        startDate,
+        endDate,
+        status,
+        incomeExpected,
+        expenseExpected,
 
     } = req.body
 
     //ERROR HANDLER
-    const project = new Project({
+    const task = new Task({
         name,
+        description,
+        userIDs,
         startDate,
         endDate,
-        incomeSoFar,
+        status,
         incomeExpected,
-        expenseSoFar,
         expenseExpected,
-        taskIDs,
-        userIDs,
+
     })
 
-    project.save().then(project=>{
-        res.json(project)
+    task.save().then(task=>{
+        res.json(task)
     })
 })
 
@@ -58,13 +57,14 @@ router.put('/:id', (req, res) => {
         incomeExpected,
         expenseSoFar,
         expenseExpected,
-        taskIDs,
+        tasks,
         userIDs,
+        materialProcurement
     } = req.body
 
 
     //  ERROR HANDLER
-    const project = {
+    const task = {
         name,
         startDate,
         endDate,
@@ -72,22 +72,23 @@ router.put('/:id', (req, res) => {
         incomeExpected,
         expenseSoFar,
         expenseExpected,
-        taskIDs,
+        tasks,
         userIDs,
+        materialProcurement
     }
 
     // Takes NORMAL JS Object as argument
     // Returns {new: true} entity, not old version
-    Project.findByIdAndUpdate(req.params.id, project, {new: true})
-        .then(updatedProject => {
-            res.json(updatedProject)
+    Task.findByIdAndUpdate(req.params.id, task, {new: true})
+        .then(updatedTask => {
+            res.json(updatedTask)
         })
 
 
 
 })
 router.delete('/:id', (req, res)=>{
-    Project.findByIdAndDelete(req.params.id).then(result=>{
+    Task.findByIdAndDelete(req.params.id).then(result=>{
         res.status(204).end()
     })
 

@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const materialUsageSchema = new mongoose.Schema({
+const procurementSchema = new mongoose.Schema({
   materialID: { type: mongoose.Schema.Types.ObjectId, ref: 'Material', required: true },
   quantity: { type: Number, required: true },
   cost: { type: Number, required: true },
   projectID: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
-  taskID: { type: mongoose.Schema.Types.ObjectId, ref: 'Task', required: true }
+  date: { type: Date, required: true }
 });
 
-materialUsageSchema.set('toJSON', {
+procurementSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -16,4 +16,4 @@ materialUsageSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('MaterialUsage', materialUsageSchema);
+module.exports = mongoose.model('MaterialProcurement', procurementSchema);

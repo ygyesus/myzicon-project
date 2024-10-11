@@ -1,45 +1,22 @@
-const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
-const url = 'mongodb://localhost:27017/myzicon';
-console.log('connecting to', url)
-
-mongoose.connect(url)
-  .then(result => {
-    console.log('connected to MongoDB')
-  })
-  .catch(error => {
-    console.log('error connecting to MongoDB:', error.message)
-  })
+const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
-
-    projectID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Project'
-    },
-    name: String,
-    description: String,
-    userIDs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
-    startDate: Date,
-    endDate: Date,
-    status: {
-        type: String,
-        enum: ['Not Started', 'In Progress', 'Completed']
-    },
-    incomeExpected: Number,
-    expenseExpected: Number
-
-})
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  userIDs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  startDate: { type: Date, required: true },
+  endDate: { type: Date, required: true },
+  status: { type: String, enum: ['Not Started', 'In Progress', 'Completed'], required: true },
+  incomeExpected: { type: Number, required: true },
+  expenseExpected: { type: Number, required: true }
+});
 
 taskSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
   }
-})
+});
 
-module.exports = mongoose.model('Task', taskSchema)
+module.exports = mongoose.model('Task', taskSchema);
